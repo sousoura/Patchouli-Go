@@ -6,6 +6,7 @@ from dlgo import gotypes
 from dlgo.utils import print_board, print_move, point_from_coords
 from six.moves import input
 from dlgo.agent.naive import RandomBot
+from exhibitor import Exhibitor
 
 """
     解读：
@@ -33,6 +34,7 @@ def main():
     game = goboard.GameState.new_game(board_size)
     # 生成bot对象 可以接收一个棋盘作为输入 输出一个落子方案
     bot = RandomBot()
+    exhibitor = Exhibitor(board_size, 50)
 
     # 判断游戏是否结束 否则一直进行轮流落子
     while not game.is_over():
@@ -41,7 +43,8 @@ def main():
         # print(chr(27) + "[2J")
 
         # 打印棋盘
-        print_board(game.board)
+        # print_board(game.board)
+        exhibitor.display(game)
         # 判断这一步由谁下
         if game.next_player == gotypes.Player.black:
             # 若由黑棋下 则人类玩家决定这一步下在哪
